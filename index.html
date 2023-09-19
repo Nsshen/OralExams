@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Oral Exam Portal</title>
+    <style>
+        /* Add CSS styles for layout and content here */
+        body {
+            font-family: Arial, sans-serif; /* Specify Arial as the preferred font */
+        }
 
+        /* Style for the container of instructions */
+        .instructions-container {
+            padding-left: 100px; /* Add left padding for space */
+        }
+
+        /* Style for line spacing between Part 1 and Part 2 instructions */
+        .instructions-spacing {
+            line-height: 3; /* Adjust line height as needed */
+        }
+ /* Style for the button to make it larger */
+        #startButton {
+            font-size: 20px; /* Adjust the font size to make the button bigger */
+            padding: 10px 20px; /* Adjust padding to increase the button's size */
+        }
+    </style>
+</head>
+<body>
+
+<center><h1>Tampines Secondary School End-of-Year Examination 2023 Paper 4 Oral</h1></center>
+
+    <!-- Instructions container with padding -->
+    <div class="instructions-container">
+        <h3>READ THESE INSTRUCTIONS FIRST</h3>
+        <p>The oral test will consist of the following two parts:</p>
+        <h4><p class="instructions-spacing">Part 1 – Planned Response</p></h4>
+        <p>You will watch a short video clip and deliver a planned response of up to 2 minutes to a given prompt.</p>
+        <p>
+        <H4><p class="instructions-spacing">Part 2 – Spoken Interaction </p></h4>
+        <p>You will engage in a discussion with the Examiners on a topic broadly related to the video clip.</p>
+<P>
+        <p class="instructions-spacing">You have 10 minutes of preparation time to watch the video clip and plan your response.</p>
+    <button id="startButton">Start</button>
+    </div>
+
+
+
+    <script>
+        // JavaScript code for handling button click
+        document.getElementById("startButton").addEventListener("click", function () {
+            // Redirect to the preparation page (replace with the actual page URL)
+            window.location.href = "preparation.html";
+        });
+    </script>
+</body>
+</html>
