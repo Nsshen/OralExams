@@ -1,55 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Oral Exam Portal</title>
-    <style>
-        /* Add CSS styles for layout and content here */
-        body {
-            font-family: Arial, sans-serif; /* Specify Arial as the preferred font */
-        }
-
-        /* Style for the container of instructions */
-        .instructions-container {
-            padding-left: 100px; /* Add left padding for space */
-        }
-
-        /* Style for line spacing between Part 1 and Part 2 instructions */
-        .instructions-spacing {
-            line-height: 3; /* Adjust line height as needed */
-        }
- /* Style for the button to make it larger */
-        #startButton {
-            font-size: 20px; /* Adjust the font size to make the button bigger */
-            padding: 10px 20px; /* Adjust padding to increase the button's size */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Oral Examination - Instructions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .instructions {
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    .btn {
+      display: block;
+      margin: 20px auto;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #0073e6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      width: 250px;
+    }
+    .btn:hover {
+      background-color: #005bb5;
+    }
+    .aa-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Secondary 1 G3 Oral Examination Instructions</h1>
 
-<center><h1>Tampines Secondary School End-of-Year Examination 2023 Paper 4 Oral</h1></center>
+  <div class="instructions">
+    <p><strong>The oral test you are about to take will consist of the following:</strong></p>
 
-    <!-- Instructions container with padding -->
-    <div class="instructions-container">
-        <h3>READ THESE INSTRUCTIONS FIRST</h3>
-        <p>The oral test will consist of the following two parts:</p>
-        <h4><p class="instructions-spacing">Part 1 – Planned Response</p></h4>
-        <p>You will watch a short video clip and deliver a planned response of up to 2 minutes to a given prompt.</p>
-        <p>
-        <H4><p class="instructions-spacing">Part 2 – Spoken Interaction </p></h4>
-        <p>You will engage in a discussion with the Examiners on a topic broadly related to the video clip.</p>
-<P>
-        <p class="instructions-spacing">You have 10 minutes of preparation time to watch the video clip and plan your response.</p>
-    <button id="startButton">Start</button>
-    </div>
+    <p><strong>Planned Response</strong><br>
+    You will watch a short video clip and deliver a planned response of up to 2 minutes to a given prompt.</p>
 
+    <p>When you click on <strong>START</strong>, you will have 10 minutes to watch the video clip and plan your response.</p>
+  </div>
 
+  <button class="btn" onclick="location.href='G3video.html'">START</button>
 
-    <script>
-        // JavaScript code for handling button click
-        document.getElementById("startButton").addEventListener("click", function () {
-            // Redirect to the preparation page (replace with the actual page URL)
-            window.location.href = "preparation.html";
-        });
-    </script>
+  <div class="aa-section">
+    <p>If you have been granted <strong>Access Arrangements</strong>, please enter your code below:</p>
+<p> It will be the first two letters of your given name and your class. e.g. if your name is Huang Yiling Clara from Form Class 1-4, your code is HUA14 </p>
+    <input type="password" id="aaCode" placeholder="Enter code">
+    <button class="btn" style="width:auto;" onclick="checkCode()">Submit</button>
+  </div>
+
+  <script>
+    function checkCode() {
+      const code = document.getElementById('aaCode').value;
+       const validCodes = ["AA123", "MUH16", "KOH17", "NUR12", "MOH14", "SEO14", "MAS11"]; // add as many as you need
+      if (validCodes.includes(code)) {
+      // Redirect to the AA exam page
+      location.href = "G3AAvideo.html";
+    } else {
+      alert("Invalid code. Please try again.");
+    }
+  }
+</script>
 </body>
 </html>
