@@ -48,7 +48,7 @@
       top: 0;
       right: 0;
       width: 80px;
-      height: 40px;
+      height: 60px;
       background: rgba(255,255,255,0); /* invisible but blocks clicks */
       z-index: 2;
     }
@@ -76,25 +76,25 @@
   <div id="container">
     <div id="video-wrapper">
       <div class="video-container">
-        <iframe src="https://drive.google.com/file/d/1g9NGZHgKVYafrgiD1Lx03wK7muPBavVx/preview"
+        <iframe src="https://drive.google.com/file/d/1y_SKjXV0fXZ9w93Pgsq-yCLZz6QTVkfz/preview"
           allow="autoplay"></iframe>
         <div class="overlay-block"></div>
       </div>
     </div>
 
     <div id="instructions">
-      <p><strong>You will watch a video which shows a group of teenagers working on a challenging problem together.</strong></p>
+      <p><strong>You will watch a video which shows people at a bookshop in a mall.</strong></p>
       <p>You will deliver a planned response of up to 2 minutes to the following prompt:</p>
-      <blockquote><em>How do you think the teenagers in the video are feeling?</em></blockquote>
+      <blockquote><em>Would you recommend a place like the one shown in the video for young people? Why or why not?</em></blockquote>
       <p>You can make notes on the paper provided and refer to them during the examination.<br>
       Your notes will not be assessed.<br>
       At the end of the examination, the notes must be handed in to the Examiners.</p>
     </div>
   </div>
 
-  <script>
+ <script>
     const EXAM_DURATION = 10 * 60 * 1000; // 10 minutes in ms
-    const END_TIME_KEY = "G3examEndTime";
+    const END_TIME_KEY = "examEndTime";
 
     function getOrSetEndTime() {
       let endTime = localStorage.getItem(END_TIME_KEY);
