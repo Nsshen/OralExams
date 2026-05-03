@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timed Video Examination</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #container {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    #video-wrapper {
+      flex: 2;
+      position: relative;
+    }
+    /* Responsive 16:9 aspect ratio box */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    /* Overlay to block Google Drive "open in new tab" button (usually top-right) */
+    .overlay-block {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 60px;
+      background: rgba(255,255,255,0); /* invisible but blocks clicks */
+      z-index: 2;
+    }
+    #instructions {
+      flex: 1.2;
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    #timer {
+      font-size: 2em;
+      margin: 20px 0;
+      font-weight: bold;
+      color: #d9534f;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Video Preparation Task</h1>
+
+  <div id="timer">10:00</div>
+
+  <div id="container">
+    <div id="video-wrapper">
+      <div class="video-container">
+        <iframe src="https://drive.google.com/file/d/1GanQ-dz0qeyt_Rri7fHLVgsg27lNLt_u/preview"
+allow="autoplay"></iframe>
+        <div class="overlay-block"></div>
+      </div>
+    </div>
+
+    <div id="instructions">
+      <p><strong>You will watch a video which shows people at a restaurant buffet.</strong></p>
+      <p>You will deliver a planned response of up to 2 minutes to the following prompt:</p>
+      <blockquote><em>Do you think activities like the one shown in the video are a good way for people to interact? Why do you say so?</em></blockquote>
+      <p>You can make notes on the paper provided and refer to them during the examination.<br>
+      Your notes will not be assessed.<br>
+      At the end of the examination, the notes must be handed in to the Examiners.</p>
+    </div>
+  </div>
+
+ <script>
+    const EXAM_DURATION = 10 * 60 * 1000; // 10 minutes in ms
+    const END_TIME_KEY = "1184examEndTime";
+
+    function getOrSetEndTime() {
+      let endTime = localStorage.getItem(END_TIME_KEY);
+      if (!endTime) {
+        endTime = Date.now() + EXAM_DURATION;
+        localStorage.setItem(END_TIME_KEY, endTime);
+      }
+      return parseInt(endTime, 10);
+    }
+
+    function startTimer() {
+      const timerDisplay = document.getElementById("timer");
+      const endTime = getOrSetEndTime();
+
+      function updateTimer() {
+        const now = Date.now();
+        const timeLeft = endTime - now;
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          localStorage.removeItem(END_TIME_KEY); // reset for next candidate
+          window.location.href = "timeout.html"; // auto-load timeout page
+          return;
+        }
+
+        const minutes = Math.floor(timeLeft / 60000);
+        const seconds = Math.floor((timeLeft % 60000) / 1000);
+        timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+      }
+
+      updateTimer();
+      const interval = setInterval(updateTimer, 1000);
+    }
+
+    // Prevent refresh shortcut
+    document.addEventListener("keydown", function (event) {
+      if (
+        event.key === "F5" ||
+        (event.ctrlKey && event.key === "r") ||
+        (event.metaKey && event.key === "r")
+      ) {
+        event.preventDefault();
+        alert("Refreshing is disabled during the exam.");
+      }
+    });
+
+    startTimer();
+   </script>
+</body>
+</html>

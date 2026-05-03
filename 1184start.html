@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oral Examination - Instructions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .instructions {
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    .btn {
+      display: block;
+      margin: 20px auto;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #0073e6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      width: 250px;
+    }
+    .btn:hover {
+      background-color: #005bb5;
+    }
+    .aa-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Secondary 4 1184 Oral Examination Instructions</h1>
+
+  <div class="instructions">
+    <p><strong>The oral test you are about to take will consist of the following:</strong></p>
+
+    <p><strong>Planned Response</strong><br>
+    You will watch a short video clip and deliver a planned response of up to 2 minutes to a given prompt.</p>
+
+    <p>When you click on <strong>START</strong>, you will have 10 minutes to watch the video clip and plan your response.</p>
+  </div>
+
+  <button class="btn" onclick="location.href='1184video.html'">START</button>
+
+  <div class="aa-section">
+    <p>If you have been granted <strong>Access Arrangements</strong>, please enter your code below:</p>
+<p> It will be the first three letters of your given name and your class. e.g. if your name is Huang Yiling Clara from Form Class 1-4, your code is HUA14 </p>
+    <input type="password" id="aaCode" placeholder="Enter code">
+    <button class="btn" style="width:auto;" onclick="checkCode()">Submit</button>
+  </div>
+
+  <script>
+    function checkCode() {
+      const code = document.getElementById('aaCode').value;
+       const validCodes = ["AA123","LIM41","NGY43","AAR46",MUH47"]; // add as many as you need
+      if (validCodes.includes(code)) {
+      // Redirect to the AA exam page
+      location.href = "1184AAvideo.html";
+    } else {
+      alert("Invalid code. Please try again.");
+    }
+  }
+</script>
+</body>
+</html>

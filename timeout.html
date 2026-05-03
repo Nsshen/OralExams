@@ -35,8 +35,11 @@
   <h1>⏰ Your time is up.</h1>
   <p>Please proceed to the examination station.</p>
 
-  <button onclick="window.location.href='G3start.html'">
-    Next Candidate Starts
-  </button>
+  <button onclick="
+  localStorage.removeItem('1184examEndTime');
+  window.location.href='1184start.html';
+">
+Next Candidate </button>
+
 </body>
 </html>
