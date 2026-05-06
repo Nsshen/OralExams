@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam with Tabs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding-top: 70px; /* prevents title from sitting under fixed timer */
+    }
+
+    #timer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      font-size: 28px;
+      font-weight: bold;
+      padding: 10px 16px;
+      border: 2px solid #c00000;
+      border-radius: 8px;
+      background: #fff3f3;
+      color: #c00000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .tab-buttons {
+      margin-bottom: 10px;
+    }
+
+    .tab-buttons button {
+      margin-right: 10px;
+      padding: 8px 16px;
+      border: none;
+      background: #ddd;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .tab-buttons button.active {
+      background: #4285f4;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 1000px;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .blocker {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 125px;
+      height: 100px;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer">Time left: 10:00</div>
+
+  <h2>Oral Examination</h2>
+<h3> Use Ctrl + or Ctrl - to increase or decrease the font size</h3>
+
+  <div class="tab-buttons">
+    <button id="passageTab" class="active" type="button">Passage</button>
+    <button id="videoTab" type="button">Video</button>
+  </div>
+
+  <div id="passageContent" class="tab-content active">
+    <p><i>You are a class leader who attended a learning journey with your classmates. You are now sharing the experience with your peers from the other classes. Here is what you say.
+</i></p>
+
+    <p>
+      Last Friday, my classmates and I stepped out of our usual classrooms and into a place filled with quiet excitement — the city art museum. Instead of worksheets and whiteboards, we were surrounded by paintings, sculptures and stories frozen in time. As we walked through the tall glass doors, I realised that learning did not always have to happen at a desk.<br>
+When we arrived, our docent greeted us with a warm smile and said, “Remember, art is not just something you look at. It is something you think about and feel.” <br>
+Those words stayed with me as we moved from one gallery to another. A painting that first looked simple soon revealed hidden details when we took time to observe it carefully. Suddenly, history felt alive.<Br>
+During the visit, we were encouraged to ask questions, discuss our ideas and even disagree respectfully. One of my classmates pointed out something I had missed entirely, reminding me that learning is often richer when shared. I found myself more curious than usual, eager to discover what each artwork had to say.<br>
+By the end of the trip, I realised that the museum was not just a place to display art. It was a classroom without walls, teaching us to observe, reflect and think deeply. As we boarded the bus back to school, I felt inspired, knowing that the world beyond our classroom holds countless lessons waiting to be explored.<br>
+
+    </p>
+  </div>
+
+  <div id="videoContent" class="tab-content">
+    <div class="video-wrapper">
+      <iframe
+        src="https://drive.google.com/file/d/1nWK-c8VgrIft0aNDPLjsD0UKRd4v85aD/preview"
+        allow="autoplay">
+      </iframe>
+      <div class="blocker"></div>
+    </div>
+  </div>
+
+  <script>
+    // --- Tab Switching ---
+    const passageTab = document.getElementById("passageTab");
+    const videoTab = document.getElementById("videoTab");
+    const passageContent = document.getElementById("passageContent");
+    const videoContent = document.getElementById("videoContent");
+
+    function switchTab(selectedTab) {
+      if (selectedTab === "passage") {
+        passageContent.classList.add("active");
+        videoContent.classList.remove("active");
+        passageTab.classList.add("active");
+        videoTab.classList.remove("active");
+      } else {
+        videoContent.classList.add("active");
+        passageContent.classList.remove("active");
+        videoTab.classList.add("active");
+        passageTab.classList.remove("active");
+      }
+    }
+
+    passageTab.addEventListener("click", () => switchTab("passage"));
+    videoTab.addEventListener("click", () => switchTab("video"));
+
+    // --- Countdown Timer ---
+    const timerDisplay = document.getElementById("timer");
+    const EXAM_DURATION_MS = 10 * 60 * 1000;
+    const STORAGE_KEY = "oral_exam_end_time";
+
+    let endTime = localStorage.getItem(STORAGE_KEY);
+
+    if (!endTime) {
+      endTime = Date.now() + EXAM_DURATION_MS;
+      localStorage.setItem(STORAGE_KEY, endTime);
+    } else {
+      endTime = parseInt(endTime, 10);
+    }
+
+    function updateTimer() {
+      const now = Date.now();
+      const timeLeft = endTime - now;
+
+      if (timeLeft <= 0) {
+        localStorage.removeItem(STORAGE_KEY);
+        window.location.href = "timeout.html";
+        return;
+      }
+
+      const minutes = Math.floor(timeLeft / 1000 / 60);
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+
+      timerDisplay.textContent =
+        "Time left: " +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
