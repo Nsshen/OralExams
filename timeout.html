@@ -35,7 +35,10 @@
   <h1>⏰ Your time is up.</h1>
   <p>Please proceed to the examination station.</p>
 
-  <button onclick="window.location.href='start.html'">
+  <button  onclick="
+  localStorage.removeItem('oral_exam_end_time');
+  window.location.href='start.html';
+    ">
     Next Candidate Starts
   </button>
 </body>
